@@ -212,7 +212,7 @@ const getCrafts = async () => {
   
   showCrafts();
   document.getElementById("add-craft-form").onsubmit = addCraft;
-  //document.getElementById("edit-craft-form").onsubmit = addEditCraft;
+    document.getElementById("edit-craft-form").onsubmit = addEditCraft;
   document.getElementById("add-link").onclick = showCraftForm;
   document.getElementById("add-supplies").onclick = addSupply;
   
