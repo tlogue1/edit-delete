@@ -99,6 +99,13 @@ body {
     margin: auto;
     max-width: 95%;
   }
+
+  .fade-in {
+    animation: fadeIn ease 0.5s;
+  }
+  .fade-out {
+    animation: fadeOut ease 0.5s;
+  }
   
   /* Typography */
   

@@ -1,6 +1,6 @@
 const getCrafts = async () => {
     try {
-      return (await fetch("https://edit-delete-4f9q.onrender.com/api/crafts/")).json();
+      return (await fetch("http://localhost:3001/api/crafts/")).json();
     } catch (error) {
       console.log(error);
     }
@@ -20,7 +20,7 @@ const getCrafts = async () => {
       section.append(a);
   
       const img = document.createElement("img");
-      img.src = "https://edit-delete-4f9q.onrender.com/" + craft.image;
+      img.src = "http://localhost:3001/" + craft.image;
       a.append(img);
   
       a.onclick = (e) => {
@@ -40,7 +40,7 @@ const getCrafts = async () => {
     craftInner.classList.add("craft-inner");
   
     const img = document.createElement("img");
-    img.src = "https://edit-delete-4f9q.onrender.com/" + craft.image;
+    img.src = "http://localhost:3001/" + craft.image;
     craftInner.append(img);
   
     const description = document.createElement("div");
@@ -62,6 +62,7 @@ const getCrafts = async () => {
       const li = document.createElement("li");
       li.innerHTML = supply;
       ul.append(li);
+
     });
   
     craftInner.append(img);
@@ -70,6 +71,33 @@ const getCrafts = async () => {
     craftDetails.append(description);
 
     populateEditForm(craft);
+
+    const section = document.createElement("section");
+
+    const editButton = document.createElement("a");
+    editButton.innerHTML = "&#xf044;" ;
+    editButton.classList.add("icon");
+    editButton.id = "edit-button" ;
+    section.append(editButton);
+
+    const deleteButton = document.createElement("a");
+    deleteButton.innerHTML = "&#xe872;" ;
+    deleteButton.classList.add("icon");
+    deleteButton.id = "delete-button";
+    section.append(deleteButton);
+
+    craftDetails.append(section);
+
+    editButton.onclick = (e) => {
+      e.preventDefault();
+      populateEditForm(craft);
+      showCraftForm();
+    };
+
+    deleteButton.onclick = (e) => {
+      e.preventDefault();
+      deleteConfirmation(craft);
+    };
   };
 
   const populateEditForm = (craft) => {
@@ -119,7 +147,7 @@ const getCrafts = async () => {
 
     await response.json();
     resetForm();
-    document.getElementById("dialog").style.display = "none";
+    document.getElementById("dialog-details").style.display = "none";
     showCrafts();
   };
 
@@ -140,7 +168,7 @@ const getCrafts = async () => {
     panel.append(no);
 
     panel.classList.remove("fade-out");
-    panel.classList.remove("hide");
+    panel.classList.remove("hidden");
     panel.classList.add("fade-in");
 
     yes.onclick =() => {
@@ -148,7 +176,7 @@ const getCrafts = async () => {
       panel.classList.remove("fade-in");
       panel.classList.add("fade-out");
       setTimeout(() => {
-        panel.classList.add("hide");
+        panel.classList.add("hidden");
       }, 500);
     };
 
@@ -249,8 +277,8 @@ const getCrafts = async () => {
   
   
   showCrafts();
-  document.getElementById("add-craft-form").onsubmit = addCraft;
-    document.getElementById("edit-craft-form").onsubmit = addEditCraft;
+  document.getElementById("add-craft-form").onclick = addCraft;
+    //document.getElementById("edit-craft-form").onsubmit = addEditCraft;
   document.getElementById("add-link").onclick = showCraftForm;
   document.getElementById("add-supplies").onclick = addSupply;
   
