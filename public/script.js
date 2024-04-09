@@ -73,16 +73,17 @@ const getCrafts = async () => {
     populateEditForm(craft);
 
     const section = document.createElement("section");
+    section.classList.add("icon");
 
     const editButton = document.createElement("a");
-    editButton.innerHTML = "&#xf044;" ;
-    editButton.classList.add("icon");
+    editButton.innerHTML = "&#xf044" ;
+    editButton.classList.add("icon-img");
     editButton.id = "edit-button" ;
     section.append(editButton);
 
     const deleteButton = document.createElement("a");
-    deleteButton.innerHTML = "&#xe872;" ;
-    deleteButton.classList.add("icon");
+    deleteButton.innerHTML = "&#xe872" ;
+    deleteButton.classList.add("icon-img");
     deleteButton.id = "delete-button";
     section.append(deleteButton);
 
@@ -96,7 +97,8 @@ const getCrafts = async () => {
 
     deleteButton.onclick = (e) => {
       e.preventDefault();
-      deleteConfirmation(craft);
+      //deleteConfirmation(craft);
+      closeDialog("craft-details");
     };
   };
 
@@ -105,7 +107,7 @@ const getCrafts = async () => {
     form._id.value = craft._id;
     form.name.value = craft.name;
     form.description.value = craft.description;
-    document.getElementById("img-prev").src = craft.img;
+    document.getElementById("img-prev").src = craft.image;
     populateSupplies(craft.supplies);
   };
 
@@ -121,7 +123,7 @@ const getCrafts = async () => {
 
   const addEditCraft = async (e) => {
     e.preventDefault();
-    const form = document.getElementById("edit-craft-form");
+    const form = document.getElementById("add-craft-form");
     const formData = new FormData(form);
     let response;
     formData.append("supplies", getSupplies());
@@ -147,10 +149,14 @@ const getCrafts = async () => {
 
     await response.json();
     resetForm();
-    document.getElementById("dialog-details").style.display = "none";
     showCrafts();
-  };
+    document.getElementById("dialog").style.display = "none";
+    //document.getElementById("craft-details").style.display = "none";
+    document.getElementById("close").click();
+    
 
+  };
+/*
   const deleteConfirmation = (craft) =>{
     const panel = document.getElementById("delete-confirmation");
     panel.innerHTML = "";
@@ -188,7 +194,7 @@ const getCrafts = async () => {
       }, 500);
     };
   };
-
+*/
   const deleteCraft = async(craft)=> {
     let response = await fetch(`/api/crafts/${craft._id}`, {
         method:"DELETE",
@@ -206,6 +212,7 @@ const getCrafts = async () => {
       resetForm();
       showCrafts();
       document.getElementById("dialog").style.display = "none";
+      document.getElementById("add-craft-form")._id.value = -1;
     };
     
   
@@ -261,9 +268,9 @@ const getCrafts = async () => {
   };
   
   const showCraftForm = (e) => {
-    e.preventDefault();
     resetForm();
     openDialog("add-craft-form");
+    document.getElementById("craft-details").classList.add("hidden");
   };
   
   const addSupply = (e) => {
@@ -273,11 +280,16 @@ const getCrafts = async () => {
     input.type = "text";
     section.append(input);
   };
-  
+
+ 
+  const closeDialog =() => {
+    document.getElementById("dialog").style.display = "none";
+    document.getElementById("_id").value = "";
+  };
   
   
   showCrafts();
-  document.getElementById("add-craft-form").onclick = addCraft;
+  document.getElementById("add-craft-form").onsubmit = addEditCraft;
     //document.getElementById("edit-craft-form").onsubmit = addEditCraft;
   document.getElementById("add-link").onclick = showCraftForm;
   document.getElementById("add-supplies").onclick = addSupply;
@@ -291,3 +303,8 @@ const getCrafts = async () => {
       e.target.files.item(0)
     );
   };
+
+  
+  
+
+  document.getElementById("close").onclick = closeDialog;

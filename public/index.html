@@ -19,11 +19,14 @@
       <div id="dialog" class="w3-modal">
         <div class="w3-modal-content">
           <div class="flex-container">
-            <span onclick="document.getElementById('dialog').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+            <span onclick="document.getElementById('dialog').style.display='none'"-
+            class="w3-button w3-display-topright">&times;</span> 
+           <!-- <h2 id="exit-button">&times;</h2> -->
               <section id="dialog-details">
+                <h2 id="delete-button"> &times;</h2>
                 <form id="add-craft-form" method="POST" class="hidden">
-
+                    <input type = "hidden" name="_id" id="_id" value ="">
+                    <input type = "hidden" id="close" value = "-1" >
                     <section class="columns">
 
                         <div class="column-container" id="details">
@@ -51,7 +54,7 @@
                         <section id="supplies-boxes"></section>
                     </p>
                     <p>
-                        <button type="submit">Cancel</button>
+                        <button>Cancel</button>
                         <button type="submit">Submit</button>
                     </p>
                 </section>
