@@ -48,6 +48,13 @@ body {
     background: lightblue;
     border-radius: 5px;
   }
+
+  #delete-confirmation button{
+    background-color: blue;
+    border: 3px solid black;
+    width: 200px;
+    height: 40px;
+  }
   
   /* Form */
   .w3-modal-content {

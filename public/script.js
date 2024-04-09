@@ -123,11 +123,49 @@ const getCrafts = async () => {
     showCrafts();
   };
 
+  const deleteConfirmation = (craft) =>{
+    const panel = document.getElementById("delete-confirmation");
+    panel.innerHTML = "";
+
+    const h2 = document.createElement("h2");
+    h2.innerHTML = `Do you want to delete ${craft.name}?`;
+    panel.append(h2);
+
+    const yes = document.createElement("button");
+    yes.innerHTML = "Yes";
+    panel.append(yes);
+
+    const no = document.createElement("button");
+    no.innerHTML = "No";
+    panel.append(no);
+
+    panel.classList.remove("fade-out");
+    panel.classList.remove("hide");
+    panel.classList.add("fade-in");
+
+    yes.onclick =() => {
+      deleteCraft(craft);
+      panel.classList.remove("fade-in");
+      panel.classList.add("fade-out");
+      setTimeout(() => {
+        panel.classList.add("hide");
+      }, 500);
+    };
+
+    no.onclick = () => {
+      panel.classList.remove("fade-in");
+      panel.classList.add("fade-out");
+      setTimeout(() => {
+        panel.classList.add("hide");
+      }, 500);
+    };
+  };
+
   const deleteCraft = async(craft)=> {
     let response = await fetch(`/api/crafts/${craft._id}`, {
         method:"DELETE",
         headers:{
-          "Content-Type":"application/json;charset=utf-8"
+          "Content-Type":"application/json;charset=utf-8",
         }
       });
     

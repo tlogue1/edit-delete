@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+    <head>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
-</head>
+    </head>
 
-<body>
+    <body>
     <header>
         <h1>Buy and Sell Crafts <a href="#" id="add-link">+</a></h1>
         
@@ -22,7 +22,7 @@
             <span onclick="document.getElementById('dialog').style.display='none'"
             class="w3-button w3-display-topright">&times;</span>
               <section id="dialog-details">
-                <form id="add-craft-form" method="post" class="hidden">
+                <form id="add-craft-form" method="POST" class="hidden">
                 
                     <h1>Make changes to your Craft<a href="#" id="add-link">+</a></h1>
                     <section class="columns">
@@ -64,5 +64,7 @@
         </div>
       </div>   
     </div>
+    <div class="hidden" id="delete-confirmation"></div>
     <script src="script.js"></script>
-</body>
+    </body>
+<html>
