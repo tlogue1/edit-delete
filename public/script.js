@@ -1,6 +1,6 @@
 const getCrafts = async () => {
     try {
-      return (await fetch("http://localhost:3001/api/crafts/")).json();
+      return (await fetch("https://edit-delete-4f9q.onrender.com/api/crafts/")).json();
     } catch (error) {
       console.log(error);
     }
@@ -20,7 +20,7 @@ const getCrafts = async () => {
       section.append(a);
   
       const img = document.createElement("img");
-      img.src = "http://localhost:3001/" + craft.image;
+      img.src = "https://edit-delete-4f9q.onrender.com/" + craft.image;
       a.append(img);
   
       a.onclick = (e) => {
@@ -40,7 +40,7 @@ const getCrafts = async () => {
     craftInner.classList.add("craft-inner");
   
     const img = document.createElement("img");
-    img.src = "http://localhost:3001/" + craft.image;
+    img.src = "https://edit-delete-4f9q.onrender.com/" + craft.image;
     craftInner.append(img);
   
     const description = document.createElement("div");
